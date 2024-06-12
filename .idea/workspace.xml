@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="44f813f3-2eab-47da-8beb-93199c22c95c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/ChessPY.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/ClientSocket.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Components/BaseState.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Components/ChessBoard.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Components/Error.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Components/MonoBehaviour.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Components/UI/Button.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Components/UI/ErrorBox.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Components/UI/Text.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Components/UI/TextBox.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/GameStates/GlobalStateImport.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/GameStates/LoginRegister.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/GameStates/MainMenu.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/bb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/bk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/bn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/bp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/bq.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/br.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/wb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/wk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/wn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/wp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/wq.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Images/wr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/config/config.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/config/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/DataStructures/connections.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/Database/DatabaseManager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/Database/users.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/Server.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/logic.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/utils.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/Desktop/Develop/python/SimpleChat/client/config/config.ini" beforeDir="false" afterPath="$USER_HOME$/Desktop/Develop/python/SimpleChat/client/config/config.ini" afterDir="false" />
+      <change beforePath="$USER_HOME$/Desktop/Develop/python/SimpleChat/server/config/config.ini" beforeDir="false" afterPath="$USER_HOME$/Desktop/Develop/python/SimpleChat/server/config/config.ini" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MyCoolDev&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MyCoolDev/Pygame_2048.git&quot;,
+    &quot;accountId&quot;: &quot;2d99c308-64ae-4205-82cb-a82c139a35f0&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2hKn7QUzxMuVqFmWvXSeGSh0UkC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.LoginRegister.executor": "Run",
+    "Python.Server.executor": "Run",
+    "Python.TextBox.executor": "Run",
+    "Python.client.executor": "Run",
+    "Python.main (1).executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.server.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/ron03/PycharmProjects/ChessPY/Client/config",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ron03\PycharmProjects\ChessPY\Client\config" />
+      <recent name="C:\Users\ron03\PycharmProjects\ChessPY\Client\Components\UI" />
+      <recent name="C:\Users\ron03\PycharmProjects\ChessPY\Client" />
+      <recent name="C:\Users\ron03\PycharmProjects\ChessPY\Server" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ron03\PycharmProjects\ChessPY\Client\Components" />
+      <recent name="C:\Users\ron03\PycharmProjects\ChessPY\Server" />
+      <recent name="C:\Users\ron03\PycharmProjects\ChessPY\Client" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main (1)">
+    <configuration name="Server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ChessPY" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Server" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Server/Server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Pygame_2048" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Desktop/Develop/python/Pygame_2048" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Desktop/Develop/python/Pygame_2048/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ChessPY" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.Server" />
+        <item itemvalue="Python.main (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PY-241.15989.155" />
+        <option value="bundled-python-sdk-babbdf50b680-7c6932dee5e4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.15989.155" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="44f813f3-2eab-47da-8beb-93199c22c95c" name="Changes" comment="" />
+      <created>1717351469040</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717351469040</updated>
+      <workItem from="1717351470408" duration="366000" />
+      <workItem from="1717351854261" duration="4246000" />
+      <workItem from="1717414862917" duration="6233000" />
+      <workItem from="1717429799871" duration="3359000" />
+      <workItem from="1717763326513" duration="21794000" />
+      <workItem from="1717848498013" duration="1251000" />
+      <workItem from="1717872554822" duration="976000" />
+      <workItem from="1717878626833" duration="4192000" />
+      <workItem from="1717936321939" duration="3466000" />
+      <workItem from="1718035524847" duration="3201000" />
+      <workItem from="1718093569963" duration="4398000" />
+      <workItem from="1718098363499" duration="7841000" />
+      <workItem from="1718140775625" duration="11872000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ChessPY$LoginRegister.coverage" NAME="LoginRegister Coverage Results" MODIFIED="1717938395946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Client/GameStates" />
+    <SUITE FILE_PATH="coverage/ChessPY$client.coverage" NAME="client Coverage Results" MODIFIED="1717937765371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop/Develop/python/SimpleChat/client" />
+    <SUITE FILE_PATH="coverage/ChessPY$TextBox.coverage" NAME="TextBox Coverage Results" MODIFIED="1717937837612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Client/Components/UI" />
+    <SUITE FILE_PATH="coverage/ChessPY$main.coverage" NAME="main Coverage Results" MODIFIED="1718152342343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Client" />
+    <SUITE FILE_PATH="coverage/ChessPY$server.coverage" NAME="server Coverage Results" MODIFIED="1717937763373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop/Develop/python/SimpleChat/server" />
+    <SUITE FILE_PATH="coverage/ChessPY$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1718151533573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop/Develop/python/Pygame_2048" />
+    <SUITE FILE_PATH="coverage/ChessPY$Server.coverage" NAME="Server Coverage Results" MODIFIED="1718152285544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
+  </component>
+</project>
