@@ -22,33 +22,37 @@ class Game:
 
         self.state_manager = StateManager()
 
-        self.client_socket = ClientSocket(self.config, self.state_manager)
+        self.client_socket = ClientSocket(self.config, self.state_manager, self.screen)
         self.client_socket.connect()
 
         self.state_manager.add_state(LoginRegisterState(self.state_manager, self.screen, self.client_socket))
         self.state_manager.add_state(MainMenu(self.state_manager, self.screen, self.client_socket))
 
     def start_game(self):
-        while self.running:
-            self.events = pygame.event.get()
-            for event in self.events:
-                if event.type == pygame.QUIT:
-                    self.running = False
-                    pygame.quit()
+        try:
+            while self.running:
+                self.events = pygame.event.get()
+                for event in self.events:
+                    if event.type == pygame.QUIT:
+                        self.running = False
+                        pygame.quit()
 
-            self.screen.fill((46, 46, 46))
+                self.screen.fill((46, 46, 46))
 
-            self.state_manager.update(self.dt, self.events)
-            self.state_manager.render(self.screen)
+                self.state_manager.update(self.dt, self.events)
+                self.state_manager.render(self.screen)
 
-            # flip() the display to put your work on screen
-            pygame.display.flip()
+                # flip() the display to put your work on screen
+                pygame.display.flip()
 
-            # limits FPS to 60
-            # dt is delta time in seconds since last frame, used for framerate-
-            # independent physics.
-            dt = self.clock.tick(60) / 1000
-
+                # limits FPS to 60
+                # dt is delta time in seconds since last frame, used for framerate-
+                # independent physics.
+                dt = self.clock.tick(60) / 1000
+        finally:
+            print("Closing Game")
+            pygame.quit()
+            self.client_socket.thread.stop()
 
 if __name__ == '__main__':
     Game().start_game()

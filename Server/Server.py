@@ -21,7 +21,7 @@ live_connections = []
 wait_list_connections = []
 
 # server global vars
-server = None
+server: socket.socket = None
 
 # logic global
 logic_controller = logic.GameManager()
@@ -148,9 +148,14 @@ def handle_client(con: Connection):
             wait_list_connections.remove(con)
         elif con.status == connections.Status.Live:
             live_connections.remove(con)
+        elif con.status == connections.Status.Queue:
+            logic_controller.remove_from_queue(con)
+            utils.server_print(con.data["address"].__str__() + " Removed from queue.")
 
         con.connection.close()
         utils.server_print("A connection with a client closed, " + str(con.data))
+        server.detach()
+        server.close()
 
 
 if __name__ == '__main__':

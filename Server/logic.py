@@ -21,6 +21,10 @@ class GameManager:
                 player1.data["game"] = game
                 player1.data["game"] = game
 
+    def remove_from_queue(self, value):
+        if self.queue.count(value) > 0:
+            self.queue.remove(value)
+
     def add_to_queue(self, con):
         self.queue.append(con)
 

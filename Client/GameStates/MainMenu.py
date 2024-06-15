@@ -25,7 +25,7 @@ class MainMenu(BaseState):
 
     def update(self, dt: float, events: list):
         if self.start_button.update(dt, events):
-            pass
+            self.client_socket.send_request({"event": "start_queue"})
         if self.exit_button.update(dt, events):
             pygame.quit()
         if self.next_chess_board.is_clicked(events):
