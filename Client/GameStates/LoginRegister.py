@@ -8,7 +8,7 @@ class LoginRegisterState(BaseState):
         self.client_socket = client_socket
         self.__init_vars(screen)
 
-    def __init_vars(self, screen: pygame.Surface = None):
+    def __init_vars(self, screen: pygame.Surface = None, *args, **kwargs):
         self.title = Text("Login To Your Account", "Open Sans", 40, True, pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2 - 150), (226, 226, 226))
         self.username_textbox = TextBox(pygame.Vector2(608, 50), pygame.Vector2(screen.get_width() / 2 - 304, screen.get_height() / 2 - 53), (29, 29, 29), "Enter Username", "Open Sans", 22, (255, 255, 255), (20, 0, 0, 0), border_radius=5)
         self.password_textbox = TextBox(pygame.Vector2(608, 50), pygame.Vector2(screen.get_width() / 2 - 304, screen.get_height() / 2 + 53), (29, 29, 29), "Enter Password", "Open Sans", 22, (255, 255, 255), (20, 0, 0, 0), border_radius=5)
@@ -16,7 +16,7 @@ class LoginRegisterState(BaseState):
         self.register_button = Button(pygame.Vector2(280, 50), pygame.Vector2(screen.get_width() / 2 + 110, screen.get_height() / 2 + 200), (122, 122, 122), "Create an account", "Open Sans", 24, (255, 255, 255), border_radius=5)
         self.login_status = False
 
-    def update(self, dt: float, events: list):
+    def update(self, dt: float, events: list, *args, **kwargs):
         self.username_textbox.update(dt, events)
         self.password_textbox.update(dt, events)
 
@@ -30,7 +30,7 @@ class LoginRegisterState(BaseState):
             if error.update(dt, events):
                 self.client_socket.error_box.pop(i)
 
-    def render(self, screen: pygame.Surface):
+    def render(self, screen: pygame.Surface, *args, **kwargs):
         self.title.render(screen)
         self.username_textbox.render(screen)
         self.password_textbox.render(screen)

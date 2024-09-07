@@ -4,17 +4,18 @@ class BaseState:
     def __init__(self, state_manager):
         self.state_manager = state_manager
 
-    def __init_vars(self):
+    def __init_vars(self, screen: pygame.Surface = None, *args, **kwargs):
         pass
 
     def restart_state(self):
         self.__init_vars()
 
-    def update(self, dt: float, events: list):
+    def update(self, dt: float, events: list, *args, **kwargs):
         pass
 
-    def render(self, screen: pygame.Surface):
+    def render(self, screen: pygame.Surface, *args, **kwargs):
         pass
+
 
 class StateManager:
     def __init__(self):

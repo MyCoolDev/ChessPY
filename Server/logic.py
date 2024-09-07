@@ -29,22 +29,11 @@ class GameManager:
         self.queue.append(con)
 
 
-# GAME GLOBAL PIECES VALUES
-PIECES_VALUES = {
-    900: "Q",
-    90: "K",
-    30.5: "B",
-    30: "N",
-    50: "R",
-    10: ""
-}
-
-
 class Game:
     def __init__(self, p1: str, p2: str, duration: int):
         self.last_move = 0
         self.players = {p1: duration, p2: duration}
-        self.turn = random.randint(0, 1) # white = 0 : black = 1
+        self.turn = random.randint(0, 1)    # white = 0 : black = 1
         self.winner = None
         self.game_history = []
         self.game_board = [["R", "N", "B", "Q", "K", "B", "K", "R"],
@@ -57,9 +46,6 @@ class Game:
                             ["r", "n", "b", "q", "k", "b", "k", "r"]]
 
     def check_if_move_legal(self, move: str, side: bool) -> bool:
-        if side not in [0, 1]:
-            return False
-
         if move[0].islower():
             return self.is_valid_pawn_move(move, side)
 
@@ -174,10 +160,10 @@ class Game:
 
         return self.actually_check_diagonal(self, file, rank, piece)
 
-    def actually_check_diagonal(self, File, Rank, piece):
+    def actually_check_diagonal(self, file, rank, piece):
         found = False
-        file = File + 1
-        rank = Rank + 1
+        file = file + 1
+        rank = rank + 1
         while file in range(0, 8) and rank in range(0, 8):
             if self.game_board[file][rank].upper() != piece and self.game_board[file][rank].upper() != "":
                 break
@@ -187,8 +173,8 @@ class Game:
             rank += 1
             file += 1
 
-        file = File + 1
-        rank = Rank - 1
+        file = file + 1
+        rank = rank - 1
         while file in range(0, 8) and rank in range(0, 8):
             if self.game_board[file][rank].upper() != piece and self.game_board[file][rank].upper() != "":
                 break
@@ -198,8 +184,8 @@ class Game:
             rank -= 1
             file += 1
 
-        file = File - 1
-        rank = Rank - 1
+        file = file - 1
+        rank = rank - 1
         while file in range(0, 8) and rank in range(0, 8):
             if self.game_board[file][rank].upper() != piece and self.game_board[file][rank].upper() != "":
                 break
@@ -209,8 +195,8 @@ class Game:
             rank -= 1
             file -= 1
 
-        file = File - 1
-        rank = Rank + 1
+        file = file - 1
+        rank = rank + 1
         while file in range(0, 8) and rank in range(0, 8):
             if self.game_board[file][rank].upper() != piece and self.game_board[file][rank].upper() != "":
                 break

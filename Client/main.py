@@ -46,13 +46,13 @@ class Game:
                 pygame.display.flip()
 
                 # limits FPS to 60
-                # dt is delta time in seconds since last frame, used for framerate-
-                # independent physics.
-                dt = self.clock.tick(60) / 1000
+                # dt is delta time in seconds since last frame, used for framerate
+                self.dt = self.clock.tick(60) / 1000
         finally:
             print("Closing Game")
             pygame.quit()
             self.client_socket.thread.stop()
+
 
 if __name__ == '__main__':
     Game().start_game()

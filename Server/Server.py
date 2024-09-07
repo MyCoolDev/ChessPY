@@ -133,6 +133,10 @@ def handle_client(con: Connection):
                     con.status = connections.Status.Queue
                     logic_controller.add_to_queue(con)
                     con.connection.send(json.dumps({'code': 200, 'event': 'queue stated', "msg": "please wait in queue until we find a match for you."}).encode())
+                if request['event'] == 'stop_queue':
+                    con.status = connections.Status.Live
+                    logic_controller.remove_from_queue(con)
+                    con.connection.send(json.dumps({'code': 200, 'event': 'queue stated', "msg": "queue closed."}).encode())
 
                 if request['event'] == "start_game" and con.status == con.status.InGame:
                     pass
