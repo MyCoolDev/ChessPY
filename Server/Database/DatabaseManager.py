@@ -1,8 +1,13 @@
+import string
+
+import random
+
 import threading
 
 from typing import List
 import json
 
+import hashlib
 
 class DatabaseManager:
     def __init__(self):
@@ -25,7 +30,16 @@ class DatabaseManager:
     def verify_data(database_name: str, key, value) -> bool:
         with open("./Database/" + database_name + ".json", 'r') as db:
             data = json.load(db)
-            if data[f"{key}"] == str(value):
+            if data[f"{key}"][0] == value:
+                return True
+
+        return False
+
+    @staticmethod
+    def verify_user_data(key, value) -> bool:
+        with open("./Database/users.json", 'r') as db:
+            data = json.load(db)
+            if data[f"{key}"][0] == DatabaseManager.hash_with_salt(value, data[f"{key}"][1]):
                 return True
 
         return False
@@ -38,13 +52,29 @@ class DatabaseManager:
             return key in data
 
     @staticmethod
-    def hash(string: str, p: int, m: int) -> int:
-        hash_number = 0
+    def hash(pre_encrypted_data: str) -> (str, str):
+        chrs = string.hexdigits
+        salt = ""
 
-        for i in range(0, len(string)):
-            hash_number += ord(string[i]) * pow(int(p), i)
+        # generate the salt
+        for _ in range(random.randint(9, 12)):
+            salt += random.choice(chrs)
 
-        return hash_number % int(m)
+        encrypted_data = (salt + pre_encrypted_data).encode()
+
+        for _ in range(3):
+            encrypted_data = hashlib.sha256(encrypted_data).hexdigest().encode()
+
+        return encrypted_data.decode(), salt
+
+    @staticmethod
+    def hash_with_salt(pre_encrypted_data: str, salt: str) -> str:
+        encrypted_data = (salt + pre_encrypted_data).encode()
+
+        for _ in range(3):
+            encrypted_data = hashlib.sha256(encrypted_data).hexdigest().encode()
+
+        return encrypted_data.decode()
 
     def __TaskChecker(self):
         while True:

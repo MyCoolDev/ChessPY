@@ -52,7 +52,11 @@ class Game:
             print("Closing Game")
             pygame.quit()
             self.client_socket.thread.stop()
+            self.client_socket.client_socket.detach()
+            self.client_socket.client_socket.close()
+
 
 
 if __name__ == '__main__':
     Game().start_game()
+    print("test")

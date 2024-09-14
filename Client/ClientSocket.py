@@ -61,6 +61,9 @@ class ClientSocket:
                         self.state_manager.remove_state(0)
                     if data["event"] == "queue stated":
                         self.state_manager.insert_state(Queueing(self.state_manager, self.screen, self))
+                    if data["event"] == "queue stopped":
+                        self.state_manager.remove_state(0)
+
         except Exception as e:
             client_print(str(e))
             self.thread.stop()

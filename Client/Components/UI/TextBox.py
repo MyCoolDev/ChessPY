@@ -7,11 +7,12 @@ class TextBox(MonoBehaviour):
     def __init__(self, size: pygame.Vector2, position: pygame.Vector2, box_color: tuple, default_content: str, font: str,
                  font_size: int, text_color: tuple, padding: tuple = (0, 0, 0, 0), padding_left: int = 0, padding_top: int = 0, padding_right: int = 0, padding_bottom: int = 0, width: int = 0, border_radius: int = -1,
                  border_top_left_radius: int = -1, border_top_right_radius: int = -1,
-                 border_bottom_left_radius: int = -1, border_bottom_right_radius: int = -1):
+                 border_bottom_left_radius: int = -1, border_bottom_right_radius: int = -1, next_input = None):
         super().__init__(size, position, box_color, width, border_radius, border_top_left_radius,
                          border_top_right_radius, border_bottom_left_radius, border_bottom_right_radius)
 
         self.is_focused = False
+        self.next_input: TextBox = next_input
 
         self.rect: pygame.Rect or None = None
 
@@ -69,12 +70,16 @@ class TextBox(MonoBehaviour):
                         self.update_text(self.content[:-1])
                     elif event.key == pygame.K_RETURN and not self.is_default_content_presented:
                         return True
+                    elif event.key == pygame.K_TAB:
+                        if self.next_input is not None:
+                            self.next_input.is_focused = True
+                            self.is_focused = False
                     elif event.unicode != "":
                         self.update_text(self.content + event.unicode)
 
         return False
 
-    def render(self, surface: pygame.Surface) -> pygame.Rect:
+    def render(self, surface: pygame.Surface) -> pygame.Rect or None:
         self.rect = super().render(surface)
         self.text.render(surface)
 

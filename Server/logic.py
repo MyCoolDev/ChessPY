@@ -1,258 +1,291 @@
 import random
-import socket
-import time
+import datetime
+import string
 
-import DataStructures.connections as connections
-
-from typing import List
-
-
-class GameManager:
-    def __init__(self):
-        self.queue: List[connections] = []
-        self.games = []
-
-    def search_match(self):
-        while True:
-            if len(self.queue) > 1:
-                player1 = self.queue.pop(0)
-                player2 = self.queue.pop(0)
-                game = Game(player1.data["username"], player2.data["username"], 10 * 60 * 1000)
-                player1.data["game"] = game
-                player1.data["game"] = game
-
-    def remove_from_queue(self, value):
-        if self.queue.count(value) > 0:
-            self.queue.remove(value)
-
-    def add_to_queue(self, con):
-        self.queue.append(con)
-
+from DataStructures.connections import Connection
+import Game_Logs.game_register_file as regfile
 
 class Game:
-    def __init__(self, p1: str, p2: str, duration: int):
-        self.last_move = 0
-        self.players = {p1: duration, p2: duration}
-        self.turn = random.randint(0, 1)    # white = 0 : black = 1
-        self.winner = None
-        self.game_history = []
-        self.game_board = [["R", "N", "B", "Q", "K", "B", "K", "R"],
-                            ["P", "P", "P", "P", "P", "P", "P", "P"],
-                            ["", "", "", "", "", "", "", ""],
-                            ["", "", "", "", "", "", "", ""],
-                            ["", "", "", "", "", "", "", ""],
-                            ["", "", "", "", "", "", "", ""],
-                            ["p", "p", "p", "p", "p", "p", "p", "p"],
-                            ["r", "n", "b", "q", "k", "b", "k", "r"]]
+    def __init__(self, p1: Connection, p2: Connection, duration: int):
+        # game inter vars
+        self.__winner = None
+        self.__game_history = []
+        self.__game_board = [["R", "N", "B", "Q", "K", "B", "N", "R"],
+                             ["P", "P", "P", "P", "P", "P", "P", "P"],
+                             ["", "", "", "", "", "", "", ""],
+                             ["", "", "", "", "", "", "", ""],
+                             ["", "", "", "", "", "", "", ""],
+                             ["", "", "", "", "", "", "", ""],
+                             ["p", "p", "p", "p", "p", "p", "p", "p"],
+                             ["r", "n", "b", "q", "k", "b", "n", "r"]]
 
-    def check_if_move_legal(self, move: str, side: bool) -> bool:
-        if move[0].islower():
-            return self.is_valid_pawn_move(move, side)
+        # give each player his token in order to make a move
+        token1, token2 = self.__generate_tokens()
+        p1.data['ident_token'], p2.data['ident_token'] = token1, token2
 
-    def is_valid_pawn_move(self, move: str, side: bool) -> bool:
-        # Implement pawn move validation
-        try:
-            file = ord(move[0]) - ord('a')
-            if file < 0 or file > 7:
-                return False
+        # get game meta data
+        self.__player_game_time_duration = duration
+        self.__players = ((p1, token1), (p2, token2))
+        self.turn = random.randint(0, 1)
+        self.__game_start_time = datetime.datetime.now()
 
-            if side:
-                if move[1] == "2":
-                    return False
+        # create game register file
+        self.__register_file = regfile.RegisterFile(regfile.LogType.TestLog)
+        self.__register_file.write_to_file(f"{self.__players[0]} vs {self.__players[1]}")
 
-                if move[1] != 'x' and move[1] != '=':
-                    rank = int(move[1]) - 1
-                    if rank < 0 or rank > 7:
-                        return False
+    @staticmethod
+    def __generate_tokens() -> (str, str):
+        chrs = string.hexdigits
+        token, other_token = "", ""
 
-                    if self.game_board[file][1] != "P":
-                        if self.game_board[file][rank - 1] != "P":
-                            return False
-                        if self.game_board[file][rank] != "":
-                            return False
-                    else:
-                        if self.game_board[file][rank - 1] != "P" and self.game_board[file][rank - 2] != "P":
-                            return False
-                        if self.game_board[file][rank] != "" or self.game_board[file][rank - 1] != "":
-                            return False
+        # generate a token
+        for _ in range(5):
+            token += random.choice(chrs)
+            other_token += random.choice(chrs)
 
-                if move[1] == 'x':
-                    eat_file = ord(move[2]) - ord('a')
+        while other_token == token:
+            # regenerate other token
+            other_token = ""
 
-                    if eat_file < 0 or eat_file > 7:
-                        return False
+            # generate a token
+            for _ in range(5):
+                other_token += random.choice(chrs)
 
-                    eat_rank = int(move[3]) - 1
+        return token, other_token
 
-                    if eat_rank < 0 or eat_rank > 7:
-                        return False
+    def do_turn(self, turn, token):
+        is_move_legal(turn, 0 if self.__players[0][1] == token else 1, self.__game_board)
 
-                    if self.game_board[file][eat_rank - 1] != "P":
-                        return False
+class GamePosition:
+    def __init__(self, pos: str, game_board):
+        self.pos = pos
+        self.file = pos[0]
+        self.number = int(pos[1])
+        self.piece = GamePiece(self, game_board)
 
-                    if self.game_board[eat_file][eat_rank] == "" or self.game_board[eat_file][eat_rank].isupper():
-                        return False
+    def get_file_index(self):
+        return ord(self.file) - 97
 
-                    if move[4] == '=':
-                        if eat_rank != 7:
-                            return False
+    def add_to_file(self, num) -> str:
+        return chr(ord(self.file) + num)
 
-                if move[1] == "=":
-                    if self.game_board[file][6] != "P" or self.game_board[file][7] != "":
-                        return False
+    def get_cords(self) -> tuple:
+        return self.get_file_index(), self.number
 
+    def __str__(self):
+        return self.pos
+
+class GamePiece:
+    def __init__(self, pos: GamePosition, game_board: list):
+        self.piece = game_board[len(game_board) - pos.number][pos.get_file_index()]
+        self.side = -1 if self.piece == "" else 1 if self.piece.isupper() else 0
+        self.pid = -1 if self.piece == "" else self.calc_pid(self.piece)
+
+    @staticmethod
+    def calc_pid(piece):
+        x = ord(piece.lower()) - 98
+        return [0, 9, 12, 14, 15, 16].index(x)
+
+# logic functions
+
+def get_all_possible_moves(pos: GamePosition, game_board: list) -> dict:
+    all_possible_moves = {}
+
+    if pos.piece.pid == GamePiece.calc_pid("p"):
+        if GamePosition(f"{pos.file}{(pos.number + 1)}", game_board).piece.pid == -1:
+            all_possible_moves[f"{pos.file}{(pos.number + 1)}"] = 0
+
+            if GamePosition(f"{pos.file}{(pos.number + 2)}", game_board).piece.pid == -1:
+                if pos.number == (pos.piece.side * 5) + 2:
+                    all_possible_moves[f"{pos.file}{pos.number + 2}"] = 0
+
+        # taking other player piece - flag 1
+
+        if pos.get_file_index() > 0:
+            all_possible_moves[f"{pos.add_to_file(-1)}{pos.number + 1}"] = 1
+        if pos.get_file_index() < 7:
+            all_possible_moves[f"{pos.add_to_file(1)}{pos.number + 1}"] = 1
+
+    if pos.piece.pid == GamePiece.calc_pid("n"):
+        if pos.get_file_index() > 0 and pos.number < 7:
+            all_possible_moves[f"{pos.add_to_file(-1)}{pos.number + 2}"] = 0 if GamePosition(
+                f"{pos.add_to_file(-1)}{pos.number + 2}", game_board).piece.pid == -1 else 1
+
+        if pos.get_file_index() < 7 and pos.number < 7:
+            all_possible_moves[f"{pos.add_to_file(1)}{pos.number + 2}"] = 0 if GamePosition(
+                f"{pos.add_to_file(1)}{pos.number + 2}", game_board).piece.pid == -1 else 1
+
+        if pos.get_file_index() > 1 and pos.number < 8:
+            all_possible_moves[f"{pos.add_to_file(-2)}{pos.number + 1}"] = 0 if GamePosition(
+                f"{pos.add_to_file(-2)}{pos.number + 1}", game_board).piece.pid == -1 else 1
+
+        if pos.get_file_index() < 6 and pos.number < 8:
+            all_possible_moves[f"{pos.add_to_file(2)}{pos.number + 1}"] = 0 if GamePosition(
+                f"{pos.add_to_file(-2)}{pos.number + 1}", game_board).piece.pid == -1 else 1
+
+        if pos.get_file_index() > 0 and pos.number > 2:
+            all_possible_moves[f"{pos.add_to_file(-1)}{pos.number - 2}"] = 0 if GamePosition(
+                f"{pos.add_to_file(-1)}{pos.number - 2}", game_board).piece.pid == -1 else 1
+
+        if pos.get_file_index() < 7 and pos.number > 2:
+            all_possible_moves[f"{pos.add_to_file(1)}{pos.number - 2}"] = 0 if GamePosition(
+                f"{pos.add_to_file(1)}{pos.number - 2}", game_board).piece.pid == -1 else 1
+
+        if pos.get_file_index() > 1 and pos.number > 1:
+            all_possible_moves[f"{pos.add_to_file(-2)}{pos.number + 1}"] = 0 if GamePosition(
+                f"{pos.add_to_file(-2)}{pos.number + 1}", game_board).piece.pid == -1 else 1
+
+        if pos.get_file_index() < 6 and pos.number > 1:
+            all_possible_moves[f"{pos.add_to_file(2)}{pos.number - 1}"] = 0 if GamePosition(
+                f"{pos.add_to_file(-2)}{pos.number - 1}", game_board).piece.pid == -1 else 1
+
+    if pos.piece.pid == GamePiece.calc_pid("r") or pos.piece.pid == GamePiece.calc_pid("q"):
+        k = 1
+        z = 0
+        dk = 1
+        dz = 0
+        flag = False
+
+        while True:
+            if not (0 <= pos.get_file_index() + z <= 7 and 1 <= pos.number + k <= 8) or flag:
+                flag = False
+                if dz == -1:
+                    break
+                if dz == 1:
+                    dz = -1
+                elif dk == 1:
+                    dk = -1
+                else:
+                    dk = 0
+                    dz = 1
+
+                k = dk
+                z = dz
+                continue
+
+            mv = GamePosition(f"{pos.add_to_file(z)}{(pos.number + k)}", game_board)
+            if mv.piece.side == pos.piece.side:
+                flag = False
+                if dz == -1:
+                    break
+                if dz == 1:
+                    dz = -1
+                elif dk == 1:
+                    dk = -1
+                else:
+                    dk = 0
+                    dz = 1
+
+                k = dk
+                z = dz
+                continue
+
+            if mv.piece.side == -1:
+                all_possible_moves[f"{pos.add_to_file(z)}{(pos.number + k)}"] = 0
             else:
-                if move[1] == "7":
-                    return False
+                all_possible_moves[f"{pos.add_to_file(z)}{(pos.number + k)}"] = 1
+                flag = True
 
-                if move[1] != 'x' and move[1] != '=':
-                    rank = int(move[1]) - 1
-                    if self.game_board[file][1] != "P":
-                        if self.game_board[file][rank] != "P":
-                            return False
-                        if self.game_board[file][rank] != "":
-                            return False
-                    else:
-                        if self.game_board[file][rank + 1] != "P" and self.game_board[file][rank + 2] != "P":
-                            return False
-                        if self.game_board[file][rank] != "" or self.game_board[file][rank + 1] != "":
-                            return False
+            k += dk
+            z += dz
 
-                if move[1] == 'x':
-                    eat_file = ord(move[2]) - ord('a')
-                    if eat_file < 0 or eat_file > 7:
-                        return False
-                    eat_rank = int(move[3]) - 1
-                    if eat_rank < 0 or eat_rank > 7:
-                        return False
-                    if self.game_board[file][eat_rank + 1] != "p":
-                        return False
-                    if self.game_board[eat_file][eat_rank] == "" or self.game_board[eat_file][eat_rank].islower():
-                        return False
-                    if move[4] == '=':
-                        if eat_rank != 1:
-                            return False
+    if pos.piece.pid == GamePiece.calc_pid("b") or pos.piece.pid == GamePiece.calc_pid("q"):
+        k = 1
+        z = 1
+        dk = 1
+        dz = 1
+        flag = False
 
-                if move[1] == "=":
-                    if self.game_board[file][1] != "p" or self.game_board[file][0] != "":
-                        return False
+        while True:
+            if not (0 <= pos.get_file_index() + z <= 7 and 1 <= pos.number + k <= 8) or flag:
+                flag = False
+                if dz == -1 and dk == -1:
+                    break
+                if dk == 1 and dz == 1:
+                    dz = -1
 
-            return True
-        finally:
-            return False
+                elif dk == 1 and dz == -1:
+                    dk = -1
+                    dz = 1
+                else:
+                    dk = -1
+                    dz = -1
 
-    def is_valid_knight_move(self, move: str):
-        # Implement knight move validation
-        pass
+                k = dk
+                z = dz
+                continue
 
-    def is_valid_bishop_move(self, move: str):
-        # Implement bishop move validation
-        return self.check_diagonal(self, move)
+            mv = GamePosition(f"{pos.add_to_file(z)}{(pos.number + k)}", game_board)
+            if mv.piece.side == pos.piece.side:
+                flag = False
+                if dz == -1 and dk == -1:
+                    break
+                if dk == 1 and dz == 1:
+                    dz = -1
 
-    def check_diagonal(self, move: str):
-        piece = move[0]
-        if move[1] != 'x':
-            file = ord(move[1]) - ord('a')
-            rank = int(move[2]) - 1
-        else:
-            file = ord(move[2]) - ord('a')
-            rank = int(move[3]) - 1
+                elif dk == 1 and dz == -1:
+                    dk = -1
+                    dz = 1
+                else:
+                    dk = -1
+                    dz = -1
 
-        return self.actually_check_diagonal(self, file, rank, piece)
+                k = dk
+                z = dz
+                continue
 
-    def actually_check_diagonal(self, file, rank, piece):
-        found = False
-        file = file + 1
-        rank = rank + 1
-        while file in range(0, 8) and rank in range(0, 8):
-            if self.game_board[file][rank].upper() != piece and self.game_board[file][rank].upper() != "":
-                break
-            if self.game_board[file][rank].upper() == piece:
-                return True
-
-            rank += 1
-            file += 1
-
-        file = file + 1
-        rank = rank - 1
-        while file in range(0, 8) and rank in range(0, 8):
-            if self.game_board[file][rank].upper() != piece and self.game_board[file][rank].upper() != "":
-                break
-            if self.game_board[file][rank].upper() == piece:
-                return True
-
-            rank -= 1
-            file += 1
-
-        file = file - 1
-        rank = rank - 1
-        while file in range(0, 8) and rank in range(0, 8):
-            if self.game_board[file][rank].upper() != piece and self.game_board[file][rank].upper() != "":
-                break
-            if self.game_board[file][rank].upper() == piece:
-                return True
-
-            rank -= 1
-            file -= 1
-
-        file = file - 1
-        rank = rank + 1
-        while file in range(0, 8) and rank in range(0, 8):
-            if self.game_board[file][rank].upper() != piece and self.game_board[file][rank].upper() != "":
-                break
-            if self.game_board[file][rank].upper() == piece:
-                return True
-
-            rank += 1
-            file -= 1
-
-        return False
-
-    def is_valid_rook_move(self, move: str):
-        # Implement rook move validation
-        pass
-
-    def is_valid_queen_move(self, move: str, side: bool):
-        # Implement queen move validation
-        if side:
-            before_file = 0
-            for play in self.game_history[::2]:
-                if play[0] == "Q":
-                    if play[1] != "x":
-                        before_file = ord(play[1]) - ord('a')
-                    else:
-                        before_file = ord(play[2]) - ord('a')
-
-            if move[1] != "x":
-                file = ord(move[1]) - ord('a')
+            if mv.piece.side == -1:
+                all_possible_moves[f"{pos.add_to_file(z)}{(pos.number + k)}"] = 0
             else:
-                file = ord(move[2]) - ord('a')
+                all_possible_moves[f"{pos.add_to_file(z)}{(pos.number + k)}"] = 1
+                flag = True
 
-        else:
-            before_file = 7
-            for play in self.game_history[1::2]:
-                if play[0] == "Q":
-                    if play[1] != "x":
-                        before_file = ord(play[1]) - ord('a')
-                    else:
-                        before_file = ord(play[2]) - ord('a')
+            k += dk
+            z += dz
+    if pos.piece.pid == GamePiece.calc_pid("k"):
+        if pos.get_file_index() > 0 and pos.number > 1:
+            all_possible_moves[f"{pos.add_to_file(-1)}{pos.number - 1}"] = 0 if GamePosition(
+                f"{pos.add_to_file(-1)}{pos.number - 1}", game_board).piece.pid == -1 else 1
+        if pos.number > 1:
+            all_possible_moves[f"{pos.file}{pos.number - 1}"] = 0 if GamePosition(
+                f"{pos.file}{pos.number - 1}", game_board).piece.pid == -1 else 1
+        if pos.get_file_index() < 7 and pos.number > 1:
+            all_possible_moves[f"{pos.add_to_file(1)}{pos.number - 1}"] = 0 if GamePosition(
+                f"{pos.add_to_file(1)}{pos.number - 1}", game_board).piece.pid == -1 else 1
+        if pos.get_file_index() < 7:
+            all_possible_moves[f"{pos.add_to_file(1)}{pos.number}"] = 0 if GamePosition(
+                f"{pos.add_to_file(1)}{pos.number}", game_board).piece.pid == -1 else 1
+        if pos.get_file_index() < 7 and pos.number < 8:
+            all_possible_moves[f"{pos.add_to_file(1)}{pos.number + 1}"] = 0 if GamePosition(
+                f"{pos.add_to_file(1)}{pos.number + 1}", game_board).piece.pid == -1 else 1
+        if pos.number < 8:
+            all_possible_moves[f"{pos.file}{pos.number + 1}"] = 0 if GamePosition(
+                f"{pos.file}{pos.number + 1}", game_board).piece.pid == -1 else 1
+        if pos.get_file_index() > 0 and pos.number < 8:
+            all_possible_moves[f"{pos.add_to_file(-1)}{pos.number + 1}"] = 0 if GamePosition(
+                f"{pos.add_to_file(-1)}{pos.number + 1}", game_board).piece.pid == -1 else 1
+        if pos.get_file_index() > 0:
+            all_possible_moves[f"{pos.add_to_file(-1)}{pos.number}"] = 0 if GamePosition(
+                f"{pos.add_to_file(-1)}{pos.number}", game_board).piece.pid == -1 else 1
 
-            if move[1] != "x":
-                file = ord(move[1]) - ord('a')
-            else:
-                file = ord(move[2]) - ord('a')
+    return all_possible_moves
 
-        if before_file != file: # צריך לבדוק גם את הרנק
-            return self.check_diagonal(self, move)
+def is_move_legal(move: str, side: int, game_board) -> (bool, tuple):
+    if side not in [0, 1]:
+        return False, None
 
-    def is_valid_king_move(self, move: str):
-        # Implement king move validation
-        pass
+    sp = GamePosition(move[:2], game_board)
+    ep = GamePosition(move[2:], game_board)
 
-    # 0 - turn is not yours, 1 - illegal move, 2 - move confirmed.
-    def do_turn(self, username: str, move: str) -> int:
-        if username != self.players.keys()[self.turn]:
-            return 0
+    if sp.piece.side != side:
+        return False, None
 
-        if not self.check_if_move_legal(move):
-            pass
+    all_possible_moves = get_all_possible_moves(sp)
+
+    if ep.pos not in all_possible_moves:
+        return False, None
+
+    if all_possible_moves[ep.pos] == 1 and ep.piece.side == sp.piece.side:
+        return False, None
+
+    return True, (sp, ep)

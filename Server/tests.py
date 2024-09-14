@@ -1,5 +1,3 @@
-import math
-
 game_board =    [["R", "N", "B", "Q", "K", "B", "K", "R"],
                 ["P", "P", "P", "P", "P", "P", "P", "P"],
                 ["", "", "", "", "", "", "", ""],
@@ -188,7 +186,22 @@ def get_all_possible_moves(pos: GamePosition) -> dict:
             k += dk
             z += dz
     if pos.piece.pid == GamePiece.calc_pid("k"):
-        pass
+        if pos.get_file_index() > 0 and pos.number > 1:
+            all_possible_moves[f"{pos.add_to_file(-1)}{pos.number - 1}"] = 0 if GamePosition(f"{pos.add_to_file(-1)}{pos.number - 1}").piece.pid == -1 else 1
+        if pos.number > 1:
+            all_possible_moves[f"{pos.file}{pos.number - 1}"] = 0 if GamePosition(f"{pos.file}{pos.number - 1}").piece.pid == -1 else 1
+        if pos.get_file_index() < 7 and pos.number > 1:
+            all_possible_moves[f"{pos.add_to_file(1)}{pos.number - 1}"] = 0 if GamePosition(f"{pos.add_to_file(1)}{pos.number - 1}").piece.pid == -1 else 1
+        if pos.get_file_index() < 7:
+            all_possible_moves[f"{pos.add_to_file(1)}{pos.number}"] = 0 if GamePosition(f"{pos.add_to_file(1)}{pos.number}").piece.pid == -1 else 1
+        if pos.get_file_index() < 7 and pos.number < 8:
+            all_possible_moves[f"{pos.add_to_file(1)}{pos.number + 1}"] = 0 if GamePosition(f"{pos.add_to_file(1)}{pos.number + 1}").piece.pid == -1 else 1
+        if pos.number < 8:
+            all_possible_moves[f"{pos.file}{pos.number + 1}"] = 0 if GamePosition(f"{pos.file}{pos.number + 1}").piece.pid == -1 else 1
+        if pos.get_file_index() > 0 and pos.number < 8:
+            all_possible_moves[f"{pos.add_to_file(-1)}{pos.number + 1}"] = 0 if GamePosition(f"{pos.add_to_file(-1)}{pos.number + 1}").piece.pid == -1 else 1
+        if pos.get_file_index() > 0:
+            all_possible_moves[f"{pos.add_to_file(-1)}{pos.number}"] = 0 if GamePosition(f"{pos.add_to_file(-1)}{pos.number}").piece.pid == -1 else 1
 
     return all_possible_moves
 
@@ -203,8 +216,6 @@ def is_move_legal(move: str, side: int) -> (bool, tuple):
         return False, None
 
     all_possible_moves = get_all_possible_moves(sp)
-
-    print(all_possible_moves)
 
     if ep.pos not in all_possible_moves:
         return False, None

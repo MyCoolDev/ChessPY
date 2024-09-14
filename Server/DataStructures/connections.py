@@ -5,7 +5,6 @@ class Status(enum.IntEnum):
     Wait = 0,
     Live = 1
     Queue = 2
-    Matched = 3
     InGame = 4
 
 class Connection:

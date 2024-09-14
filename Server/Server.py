@@ -5,7 +5,7 @@ import json
 import utils
 import DataStructures.connections as connections
 from DataStructures.connections import Connection
-import logic
+from GameManager import GameManager
 
 from Database.DatabaseManager import DatabaseManager
 DB = DatabaseManager()
@@ -24,7 +24,7 @@ wait_list_connections = []
 server: socket.socket = None
 
 # logic global
-logic_controller = logic.GameManager()
+Game_Manager = GameManager()
 
 # load the config from the config file
 config = utils.load_config("config/config.ini")
@@ -73,10 +73,6 @@ def handle_client(con: Connection):
         utils.server_print("A new connection has been initialized, " + str(con.data))
 
         while True:
-            if con.status == connections.Status.Matched:
-                con.status = connections.Status.InGame
-                con.connection.send(json.dumps({'code': 200, 'event': 'match found', "msg": "we found a match for you!"}).encode())
-
             request = json.loads(con.connection.recv(1024).decode())
 
             if 'event' not in request.keys():
@@ -86,15 +82,11 @@ def handle_client(con: Connection):
             # authorization check
             if 'username' not in con.data.keys():
                 if request['event'] == 'login':
-                    if 'username' in con.data.keys():
-                        con.connection.send(json.dumps({'code': 409, 'event': 'conflict', "msg": "you're already logged in, please logout in order to login again."}).encode())
-                        continue
-
                     if 'data' not in request.keys() or 'username' not in request['data'].keys() or 'password' not in request['data'].keys():
                         con.connection.send(json.dumps({'code': 400, 'event': 'bad request', "msg": "'data' is required for login request."}).encode())
                         continue
 
-                    if not DatabaseManager.verify_data("users", request['data']['username'], request['data']['password']):
+                    if not DatabaseManager.verify_user_data(request['data']['username'], request['data']['password']):
                         con.connection.send(json.dumps({'code': 406, 'event': 'login error', "msg": "the username or password is incorrect"}).encode())
                         continue
 
@@ -114,7 +106,7 @@ def handle_client(con: Connection):
                         con.connection.send(json.dumps({'code': 406, 'event': 'username error', "msg": "username is already exists."}).encode())
                         continue
 
-                    DB.add_data("users", request['data']['username'], request['data']['password'])
+                    DB.add_data("users", request['data']['username'], DatabaseManager.hash(request['data']['password']))
                     con.connection.send(json.dumps({'code': 200, 'event': 'register complete', "msg": "the register was successful"}).encode())
             else:
                 if request['event'] == 'logout':
@@ -131,12 +123,12 @@ def handle_client(con: Connection):
 
                 if request['event'] == 'start_queue':
                     con.status = connections.Status.Queue
-                    logic_controller.add_to_queue(con)
+                    Game_Manager.add_to_queue(con)
                     con.connection.send(json.dumps({'code': 200, 'event': 'queue stated', "msg": "please wait in queue until we find a match for you."}).encode())
                 if request['event'] == 'stop_queue':
                     con.status = connections.Status.Live
-                    logic_controller.remove_from_queue(con)
-                    con.connection.send(json.dumps({'code': 200, 'event': 'queue stated', "msg": "queue closed."}).encode())
+                    Game_Manager.remove_from_queue(con)
+                    con.connection.send(json.dumps({'code': 200, 'event': 'queue stopped', "msg": "queue closed."}).encode())
 
                 if request['event'] == "start_game" and con.status == con.status.InGame:
                     pass
@@ -153,13 +145,12 @@ def handle_client(con: Connection):
         elif con.status == connections.Status.Live:
             live_connections.remove(con)
         elif con.status == connections.Status.Queue:
-            logic_controller.remove_from_queue(con)
+            Game_Manager.remove_from_queue(con)
             utils.server_print(con.data["address"].__str__() + " Removed from queue.")
 
-        con.connection.close()
         utils.server_print("A connection with a client closed, " + str(con.data))
-        server.detach()
-        server.close()
+        con.connection.detach()
+        con.connection.close()
 
 
 if __name__ == '__main__':
