@@ -1,7 +1,5 @@
 import math
 
-import pygame
-
 from Client.GameStates.GlobalStateImport import *
 
 class Queueing(BaseState):

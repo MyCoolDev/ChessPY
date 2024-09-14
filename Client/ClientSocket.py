@@ -10,6 +10,7 @@ from Client.config.utils import client_print
 from Client.Components.BaseState import StateManager
 
 from Client.GameStates.Queueing import Queueing
+from Client.GameStates.InGame import InGame
 
 class ClientSocket:
     def __init__(self, config: dict, state_manager: StateManager, screen: pygame.Surface):
@@ -63,9 +64,13 @@ class ClientSocket:
                         self.state_manager.insert_state(Queueing(self.state_manager, self.screen, self))
                     if data["event"] == "queue stopped":
                         self.state_manager.remove_state(0)
+                    if data["event"] == "match found":
+                        self.state_manager.insert_state(InGame(self.state_manager, self.screen, self))
+                        self.state_manager.remove_state(1)
 
         except Exception as e:
             client_print(str(e))
             self.thread.stop()
             self.client_socket.detach()
             self.client_socket.close()
+            pygame.quit()
