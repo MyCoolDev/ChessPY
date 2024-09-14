@@ -1,7 +1,6 @@
 import pygame
 pygame.font.init()
 
-
 class Text:
     def __init__(self, txt: str, font: str, font_size: int, bold: bool, position: pygame.Vector2, color: tuple, alpha=255, top_left_mode=False, left_mode=False, top_mode=False):
         self.txt = txt

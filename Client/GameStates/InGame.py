@@ -1,4 +1,7 @@
-from Client.GameStates.GlobalStateImport import *
+import pygame
+
+from Components.BaseState import BaseState, StateManager
+
 
 class InGame(BaseState):
     def __init__(self, state_manager: StateManager, screen: pygame.Surface, client_socket):

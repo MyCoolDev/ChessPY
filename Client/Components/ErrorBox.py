@@ -1,8 +1,8 @@
 import pygame
 
-from Client.Components.MonoBehaviour import MonoBehaviour
-from Client.Components.UI.Text import Text
-from Client.Components.UI.Button import Button
+from .MonoBehaviour import MonoBehaviour
+from .Text import Text
+from .Button import Button
 
 class ErrorBox(MonoBehaviour):
     def __init__(self, bottom_pos: int, screen: pygame.Surface, code: int, event: str, description: str):

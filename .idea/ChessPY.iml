@@ -6,7 +6,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Pygame_2048" />
-    <orderEntry type="module" module-name="SimpleChat" />
+  </component>
+  <component name="PyNamespacePackagesService">
+    <option name="namespacePackageFolders">
+      <list>
+        <option value="$MODULE_DIR$/Client" />
+      </list>
+    </option>
   </component>
 </module>

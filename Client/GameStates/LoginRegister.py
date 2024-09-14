@@ -1,5 +1,10 @@
-from Client.GameStates.GlobalStateImport import *
+import pygame
 
+from Components.BaseState import BaseState, StateManager
+from Components.Text import Text
+from Components.TextBox import TextBox
+from Components.Button import Button
+from ClientSocket import ClientSocket
 
 class LoginRegisterState(BaseState):
     def __init__(self, state_manager: StateManager, screen: pygame.Surface, client_socket: ClientSocket):

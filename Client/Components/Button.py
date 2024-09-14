@@ -1,7 +1,7 @@
 import pygame
-from Client.Components.MonoBehaviour import MonoBehaviour
-from Client.Components.UI.Text import Text
 
+from .MonoBehaviour import MonoBehaviour
+from .Text import Text
 
 class Button(MonoBehaviour):
     def __init__(self, size: pygame.Vector2, position: pygame.Vector2, color: tuple, content: str, font: str = "", font_size: int = 0, text_color: tuple = (0, 0, 0), top_left_mode=False, width: int = 0, border_radius: int = -1, border_top_left_radius: int = -1, border_top_right_radius: int = -1, border_bottom_left_radius: int = -1, border_bottom_right_radius: int = -1):

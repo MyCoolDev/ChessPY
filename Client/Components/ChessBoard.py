@@ -2,7 +2,7 @@ import random
 import pygame
 import os
 
-from Client.Components.MonoBehaviour import MonoBehaviour
+from .MonoBehaviour import MonoBehaviour
 
 class ChessBoard:
     def __init__(self, base_pos: pygame.Vector2, size: int, theme=((80, 59, 54), (220, 213, 197)), show_pieces=False):

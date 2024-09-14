@@ -3,14 +3,14 @@ import pygame
 import socket
 import json
 
-from Client.StoppableThread import StoppableThread
+from StoppableThread import StoppableThread
 
-from Client.Components.Error import Error
-from Client.config.utils import client_print
-from Client.Components.BaseState import StateManager
+from Components.Error import Error
+from config.utils import client_print
+from Components.BaseState import StateManager
 
-from Client.GameStates.Queueing import Queueing
-from Client.GameStates.InGame import InGame
+from GameStates.Queueing import Queueing
+from GameStates.InGame import InGame
 
 class ClientSocket:
     def __init__(self, config: dict, state_manager: StateManager, screen: pygame.Surface):

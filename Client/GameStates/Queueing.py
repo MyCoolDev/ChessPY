@@ -1,6 +1,12 @@
 import math
 
-from Client.GameStates.GlobalStateImport import *
+import pygame
+
+from Components.MonoBehaviour import MonoBehaviour
+from Components.BaseState import BaseState, StateManager
+from Components.Text import Text
+from Components.Button import Button
+
 
 class Queueing(BaseState):
     def __init__(self, state_manager: StateManager, screen: pygame.Surface, client_socket):
@@ -8,6 +14,7 @@ class Queueing(BaseState):
 
         self.client_socket = client_socket
         self.__init_vars(screen)
+
 
     def __init_vars(self, screen: pygame.Surface = None, *args, **kwargs):
         self.alpha = 0

@@ -2,11 +2,11 @@ import math
 import pygame
 import socket
 
-import Client.config.utils as utils
-from Client.Components.BaseState import StateManager
-from Client.GameStates.LoginRegister import LoginRegisterState
-from Client.GameStates.MainMenu import MainMenu
-from Client.ClientSocket import ClientSocket
+import config.utils as utils
+from Components.BaseState import StateManager
+from GameStates.LoginRegister import LoginRegisterState
+from GameStates.MainMenu import MainMenu
+from ClientSocket import ClientSocket
 
 class Game:
     def __init__(self):

@@ -1,6 +1,6 @@
 import pygame
 
-from Client.Components.UI.ErrorBox import ErrorBox
+from .ErrorBox import ErrorBox
 
 class Error:
     def __init__(self, code: int, event: str, description: str):

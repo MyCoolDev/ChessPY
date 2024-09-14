@@ -2,8 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$USER_HOME$/Desktop/Develop/python/Pygame_2048" vcs="Git" />
-    <mapping directory="$USER_HOME$/Desktop/Develop/python/SimpleChat" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
 </project>

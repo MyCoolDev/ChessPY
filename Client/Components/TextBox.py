@@ -1,7 +1,7 @@
 import pygame
 
-from Client.Components.MonoBehaviour import MonoBehaviour
-from Client.Components.UI.Text import Text
+from .MonoBehaviour import MonoBehaviour
+from .Text import Text
 
 class TextBox(MonoBehaviour):
     def __init__(self, size: pygame.Vector2, position: pygame.Vector2, box_color: tuple, default_content: str, font: str,
