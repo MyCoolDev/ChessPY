@@ -4,25 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44f813f3-2eab-47da-8beb-93199c22c95c" name="Changes" comment="update client socket and ingame code">
-      <change beforePath="$PROJECT_DIR$/.idea/ChessPY.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ChessPY.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="44f813f3-2eab-47da-8beb-93199c22c95c" name="Changes" comment="updating the directory of the project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/ClientSocket.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/ClientSocket.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/Components/ChessBoard.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Components/ChessBoard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Components/Error.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Components/Error.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Components/MonoBehaviour.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Components/MonoBehaviour.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Components/UI/Button.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Components/Button.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Components/UI/ErrorBox.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Components/ErrorBox.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Components/UI/Text.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Components/Text.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Components/UI/TextBox.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Components/TextBox.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/GameStates/GlobalStateImport.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/GameStates/InGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/GameStates/InGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/GameStates/LoginRegister.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/GameStates/LoginRegister.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/GameStates/MainMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/GameStates/MainMenu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/GameStates/Queueing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/GameStates/Queueing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Database/DatabaseManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Database/DatabaseManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Database/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Database/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +71,8 @@
     "Python.server.executor": "Run",
     "Python.tests.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "database.data.extractors.current.export.id": "JSON-Groovy.json.groovy",
+    "database.data.extractors.current.id": "JSON-Groovy.json.groovy",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/ron03/PycharmProjects/ChessPY",
@@ -88,7 +81,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -230,7 +223,8 @@
       <workItem from="1725705172401" duration="5368000" />
       <workItem from="1725720681666" duration="6983000" />
       <workItem from="1726304554780" duration="14924000" />
-      <workItem from="1726327297890" duration="2213000" />
+      <workItem from="1726327297890" duration="2500000" />
+      <workItem from="1726504988194" duration="10141000" />
     </task>
     <task id="LOCAL-00001" summary="Upload Porject to Github">
       <option name="closed" value="true" />
@@ -296,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726326387245</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="updating the directory of the project">
+      <option name="closed" value="true" />
+      <created>1726329602495</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1726329602495</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,16 +323,17 @@
     <MESSAGE value="adding some more changes" />
     <MESSAGE value="adding git ignore" />
     <MESSAGE value="update client socket and ingame code" />
-    <option name="LAST_COMMIT_MESSAGE" value="update client socket and ingame code" />
+    <MESSAGE value="updating the directory of the project" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating the directory of the project" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ChessPY$LoginRegister.coverage" NAME="LoginRegister Coverage Results" MODIFIED="1717938395946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Client/GameStates" />
     <SUITE FILE_PATH="coverage/ChessPY$tests.coverage" NAME="tests Coverage Results" MODIFIED="1726310029711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
     <SUITE FILE_PATH="coverage/ChessPY$client.coverage" NAME="client Coverage Results" MODIFIED="1717937765371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop/Develop/python/SimpleChat/client" />
     <SUITE FILE_PATH="coverage/ChessPY$TextBox.coverage" NAME="TextBox Coverage Results" MODIFIED="1717937837612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Client/Components/UI" />
-    <SUITE FILE_PATH="coverage/ChessPY$main.coverage" NAME="main Coverage Results" MODIFIED="1726329248293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Client" />
+    <SUITE FILE_PATH="coverage/ChessPY$main.coverage" NAME="main Coverage Results" MODIFIED="1726514876439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Client" />
     <SUITE FILE_PATH="coverage/ChessPY$server.coverage" NAME="server Coverage Results" MODIFIED="1717937763373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop/Develop/python/SimpleChat/server" />
     <SUITE FILE_PATH="coverage/ChessPY$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1718151533573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop/Develop/python/Pygame_2048" />
-    <SUITE FILE_PATH="coverage/ChessPY$Server.coverage" NAME="Server Coverage Results" MODIFIED="1726326958225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
+    <SUITE FILE_PATH="coverage/ChessPY$Server.coverage" NAME="Server Coverage Results" MODIFIED="1726514148781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
   </component>
 </project>

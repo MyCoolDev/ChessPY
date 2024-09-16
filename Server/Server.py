@@ -95,7 +95,7 @@ def handle_client(con: Connection):
                     con.status = connections.Status.Live
                     con.data["username"] = request['data']['username']
 
-                    con.connection.send(json.dumps({'code': 200, 'event': 'login complete', "msg": "the login was successful"}).encode())
+                    con.connection.send(json.dumps({'code': 200, 'event': 'login complete', "msg": "the login was successful", 'data': {}}).encode())
 
                 elif request['event'] == 'register':
                     if 'data' not in request.keys() or 'username' not in request['data'].keys() or 'password' not in request['data'].keys():
@@ -106,7 +106,7 @@ def handle_client(con: Connection):
                         con.connection.send(json.dumps({'code': 406, 'event': 'username error', "msg": "username is already exists."}).encode())
                         continue
 
-                    DB.add_data("users", request['data']['username'], DatabaseManager.hash(request['data']['password']))
+                    DB.add_data("users", request['data']['username'], {"password": DatabaseManager.hash(request['data']['password'])})
                     con.connection.send(json.dumps({'code': 200, 'event': 'register complete', "msg": "the register was successful"}).encode())
             else:
                 if request['event'] == 'logout':

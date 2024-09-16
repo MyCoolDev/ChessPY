@@ -1,7 +1,7 @@
 import pygame
 
 from Components.BaseState import BaseState, StateManager
-
+from Components.ChessBoard import ChessBoard
 
 class InGame(BaseState):
     def __init__(self, state_manager: StateManager, screen: pygame.Surface, client_socket):

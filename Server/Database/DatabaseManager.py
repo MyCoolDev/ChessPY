@@ -39,7 +39,7 @@ class DatabaseManager:
     def verify_user_data(key, value) -> bool:
         with open("./Database/users.json", 'r') as db:
             data = json.load(db)
-            if data[f"{key}"][0] == DatabaseManager.hash_with_salt(value, data[f"{key}"][1]):
+            if key in data and data[f"{key}"]["password"][0] == DatabaseManager.hash_with_salt(value, data[f"{key}"]["password"][1]):
                 return True
 
         return False

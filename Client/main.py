@@ -8,15 +8,15 @@ from GameStates.LoginRegister import LoginRegisterState
 from GameStates.MainMenu import MainMenu
 from ClientSocket import ClientSocket
 
-class Game:
+class Client:
     def __init__(self):
         self.config = utils.load_config("config/config.ini")
 
         self.screen = pygame.display.set_mode()
         pygame.display.set_caption("ChessPY")
-        self.events = None
 
         self.running = True
+        self.events = None
         self.clock = pygame.time.Clock()
         self.dt = 0
 
@@ -58,5 +58,5 @@ class Game:
 
 
 if __name__ == '__main__':
-    Game().start_game()
+    Client().start_game()
     print("test")

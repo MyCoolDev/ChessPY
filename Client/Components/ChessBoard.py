@@ -1,6 +1,7 @@
 import random
 import pygame
 import os
+import math
 
 from .MonoBehaviour import MonoBehaviour
 
@@ -14,6 +15,15 @@ class ChessBoard:
         self.show_pieces = show_pieces
 
         self.board = []
+        self.game_board = [["R", "N", "B", "Q", "K", "B", "N", "R"],
+                             ["P", "P", "P", "P", "P", "P", "P", "P"],
+                             ["", "", "", "", "", "", "", ""],
+                             ["", "", "", "", "", "", "", ""],
+                             ["", "", "", "", "", "", "", ""],
+                             ["", "", "", "", "", "", "", ""],
+                             ["p", "p", "p", "p", "p", "p", "p", "p"],
+                             ["r", "n", "b", "q", "k", "b", "n", "r"]]
+
         if show_pieces:
             self.__load_pieces_images()
 
@@ -25,7 +35,6 @@ class ChessBoard:
         for i in range(0, 8):
             self.board.append([])
             for j in range(0, 8):
-
                 if (j + i) % 2 == 0:
                     color = self.theme[0]
                 else:
@@ -80,6 +89,9 @@ class ChessBoard:
 
         self.__create_board()
 
+    def mark_blocks(self, screen: pygame.Surface, cords: tuple):
+        pygame.draw.circle(screen, (122, 122, 122, 0.5), self.base_pos + ((cords[0] - 0.5) * self.box_size, (cords[1] - 0.5) * self.box_size), self.box_size / 3)
+
     def update(self, dt: float, events: list):
         pass
 
@@ -90,6 +102,18 @@ class ChessBoard:
                     return True
 
         return False
+
+    def find_chess_pieces(self, events):
+        if not self.is_clicked(events):
+            return -1, -1
+
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                index_pos = (1 / self.box_size) * (pygame.Vector2(pos[0], pos[1]) - self.base_pos)
+                index_pos = (math.floor(index_pos[0]), math.floor(index_pos[1]))
+
+                return index_pos
 
     def render(self, screen: pygame.Surface):
         for i in range(0, 8):

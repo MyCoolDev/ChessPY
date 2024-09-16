@@ -1,1 +1,8 @@
-{"ron": ["9fbb44f342b728f0e20a90caaf0dc2197e19d7a6b7cc5698ca4f35c9aa943416", "2cc57CB80"], "test": ["ee8b19fe26b233bd2871bea92f00f6efaf7cca314023248420a3ff50661d3d38", "6D793A808C"]}
+{
+  "ron": {
+    "password": ["9fbb44f342b728f0e20a90caaf0dc2197e19d7a6b7cc5698ca4f35c9aa943416", "2cc57CB80"]
+  },
+  "test": {
+    "password": ["ee8b19fe26b233bd2871bea92f00f6efaf7cca314023248420a3ff50661d3d38", "6D793A808C"]
+  }
+}
